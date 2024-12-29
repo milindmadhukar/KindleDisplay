@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - /tmp:/tmp
+    environment:
+      SCREENSHOT_URL: "file:///usr/src/app/index.html"
+

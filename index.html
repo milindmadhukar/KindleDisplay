@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <style>
+    .mx-3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    .clock-container {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .time {
+      display: flex;
+      gap: 0.2em;
+      font-family: monospace;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: min(12vw, 12rem);
+    }
+
+    #hours,
+    #minutes {
+      color: #fff;
+      font-weight: bold;
+      text-align: center;
+      background: #333;
+      padding: 0.2em;
+      border-radius: 0.1em;
+      position: relative;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+      min-width: 1.7em;
+    }
+
+    #hours::after,
+    #minutes::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .separator {
+      color: #333;
+      margin: 0 0.1em;
+    }
+
+    #ampm {
+      color: #fff;
+      font-weight: bold;
+      background: #333;
+      padding: 0.3em;
+      border-radius: 0.1em;
+      margin-left: 0.5em;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+      position: relative;
+      font-size: 0.3em;
+    }
+
+    #ampm::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div>
+
+    <a class="weatherwidget-io" href="https://forecast7.com/en/19d1172d94/vikhroli/" data-label_1="Vikhroli"
+      data-label_2="Home" data-theme="pure">Vikhroli Home</a>
+    <script>
+      !function (d, s, id) {var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) {js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs);} }(document, 'script', 'weatherwidget-io-js');
+    </script>
+
+  </div>
+
+  <div class="my-12 items-center justify-center">
+    <div class="clock-container">
+      <div class="time"><span id="hours">12</span><span class="separator">:</span><span id="minutes">00</span><span
+          id="ampm">AM</span></div>
+    </div>
+  </div>
+
+</body>
+
+
+<script> !function (d, s, id) {
+    var js,
+      fjs = d.getElementsByTagName(s)[0];
+
+    if (!d.getElementById(id)) {
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://weatherwidget.io/js/widget.min.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }
+  }
+
+    (document, 'script', 'weatherwidget-io-js');
+
+
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('ampm').textContent = ampm;
+  }
+
+  updateClock();
+  setInterval(updateClock, 60000);
+</script>
+
+</html>
